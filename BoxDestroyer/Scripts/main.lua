@@ -13,22 +13,24 @@ RegisterKeyBind(config.key, config.modifier_keys, function()
     -- Create a table to store empty boxes
     local emptyBoxes = {}
 	
-	if firstPersonCharacter.bHoldingItem == true then
-		print("The player is currently holding an item and we can't guarantee it is not an empty box. Aborting box deletion process.")
-		return
+	-- It would be nice if we could scan ALL players in the session to see if ANY of them are carrying something.
+	if firstPersonCharacter.bHoldingItem and IsActorABox(firstPersonCharacter.ItemHeld) then
+		local heldBoxId = GetActorId(firstPersonCharacter.ItemHeld)
+
+		print("Held box ID -> " .. heldBoxId)
+		print("Held item is a box.")-- Its ID is " .. GetActorId(firstPersonCharacter.ItemHeld))
+	else
+		print("Held item is not a box.")
 	end
-	
-	-- local heldItem = firstPersonCharacter.ItemHeld	
-	-- print("Stringified heldItem -> " .. tostring(heldItem))
-	-- print("Purple Dinosaurs -> " .. heldItem:GetHumanReadableName())
-	
-	-- local heldItem = {}
-	-- firstPersonCharacter:GetHeldItem(heldItem)
-	-- PrintTable(heldItem)
-	
+
     -- Collect all empty boxes
     for i = 1, #stockManager.Boxes do
         local box = stockManager.Boxes[i]
+		-- local boxCanBeGrabbed = {}
+
+		-- This seems to return true, even if the box is currently being held.
+		-- box:CanBeGrabbed(boxCanBeGrabbed)
+		-- PrintTable(boxCanBeGrabbed)
 	
 		-- print("Box" .. tostring(box))
 		
@@ -36,6 +38,8 @@ RegisterKeyBind(config.key, config.modifier_keys, function()
 			-- print("You're holding this empty box.")
 		-- end
 		
+		-- print("boxCanBeGrabbed -> " .. tostring(boxCanBeGrabbed))
+
         if box:IsEmpty() and not box.bInStorage then
             table.insert(emptyBoxes, box)
         end
@@ -51,47 +55,20 @@ RegisterKeyBind(config.key, config.modifier_keys, function()
     end
 end)
 
-function PrintTable(tbl, depth, n)
-  n = n or 0;
-  depth = depth or 5;
+function IsActorABox(actor)
+    if not actor:IsValid() then
+        print("Actor is not valid. Cannot determine if it is a box.")
+        return false
+    end
 
-  if (depth == 0) then
-      print(string.rep(' ', n).."...");
-      return;
-  end
+	return actor:IsA("/Game/BPs/BP_Box.BP_Box_C")
+end
 
-  if (n == 0) then
-      print(" ");
-  end
+function GetActorId(actor)
+	if not actor:IsValid() then
+        print("Actor is not valid. Cannot get the ID of it.")
+        return nil
+    end
 
-  for key, value in pairs(tbl) do
-	print("FooKey " .. key)
-	print("FooValue " .. type(value))
-	print("StringifiedValue " .. tostring(value))
-      if (key and type(key) == "number" or type(key) == "string") then
-          key = string.format("[\"%s\"]", key);
-
-          if (type(value) == "table") then
-              if (next(value)) then
-                  print(string.rep(' ', n)..key.." = {");
-                  PrintTable(value, depth - 1, n + 4);
-                  print(string.rep(' ', n).."},");
-              else
-                  print(string.rep(' ', n)..key.." = {},");
-              end
-          else
-              if (type(value) == "string") then
-                  value = string.format("\"%s\"", value);
-              else
-                  value = tostring(value);
-              end
-
-              print(string.rep(' ', n)..key.." = "..value..",");
-          end
-      end
-  end
-
-  if (n == 0) then
-      print(" ");
-  end
+	return actor:GetName()
 end

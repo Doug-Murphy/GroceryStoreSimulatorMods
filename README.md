@@ -9,7 +9,8 @@ This mod aims to make box cleanup a breeze! Any empty boxes lying on the ground 
 The keybind is configurable in the config.lua file similar to other mods.
 
 ### Known Issues/Future Work
-- Currently, if you are carrying an item the the process is aborted. This is because if you are holding an empty box and it is deleted, then you won't be able to pick something up until you go to menu and reload your save.
+- If any player is carrying an empty box, the box is deleted and that player will be unable to pick anything else up until they leave and rejoin the session.
+- If the player executing the box deletion is carrying something, the process is aborted. This is in an effort to reduce the chance of entering the bugged state as mentioned above.
 
 # Contributing
 
