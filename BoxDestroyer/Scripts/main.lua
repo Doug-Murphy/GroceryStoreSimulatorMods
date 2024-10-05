@@ -1,59 +1,47 @@
 local config = require "config"
 
 RegisterKeyBind(config.key, config.modifier_keys, function()
-    print("Keybind Pressed: Deleting boxes.")
-	
+	print("Keybind Pressed: Deleting boxes.")
+
 	local firstPersonCharacter = FindFirstOf("BP_FirstPersonCharacter_C")
 	local player = FindFirstOf("BP_Player_C")
-    local stockManager = FindFirstOf("BP_StockManager_C")
-    local despawner = FindFirstOf("BP_Despawner_C")
-    
-    print("Found " .. #stockManager.Boxes .. " boxes.")
-    
-    -- Create a table to store empty boxes
-    local emptyBoxes = {}
-	
-	-- It would be nice if we could scan ALL players in the session to see if ANY of them are carrying something.
-	if firstPersonCharacter.bHoldingItem and IsActorABox(firstPersonCharacter.ItemHeld) then
-		local heldBoxId = GetActorId(firstPersonCharacter.ItemHeld)
+	local stockManager = FindFirstOf("BP_StockManager_C")
+	local despawner = FindFirstOf("BP_Despawner_C")
 
-		print("Held box ID -> " .. heldBoxId)
-		print("Held item is a box.")-- Its ID is " .. GetActorId(firstPersonCharacter.ItemHeld))
+	print("Found " .. #stockManager.Boxes .. " boxes.")
+
+	-- It would be nice if we could scan ALL players in the session to see if ANY of them are carrying a box.
+	if firstPersonCharacter.bHoldingItem and IsActorABox(firstPersonCharacter.ItemHeld) and firstPersonCharacter.ItemHeld:IsEmpty() then
+		print("Player is holding an empty box. Aborting box deletion for safety.")
+		return false
 	else
-		print("Held item is not a box.")
+		print("Player is not holding an empty box. Proceeding with box deletion.")
 	end
 
-    -- Collect all empty boxes
-    for i = 1, #stockManager.Boxes do
-        local box = stockManager.Boxes[i]
-		-- local boxCanBeGrabbed = {}
+	-- Create a table to store empty boxes
+	local emptyBoxes = {}
 
-		-- This seems to return true, even if the box is currently being held.
-		-- box:CanBeGrabbed(boxCanBeGrabbed)
-		-- PrintTable(boxCanBeGrabbed)
-	
-		-- print("Box" .. tostring(box))
-		
-		-- if heldItem == box then
-			-- print("You're holding this empty box.")
-		-- end
-		
-		-- print("boxCanBeGrabbed -> " .. tostring(boxCanBeGrabbed))
+	-- Collect all empty boxes
+	for i = 1, #stockManager.Boxes do
+		local box = stockManager.Boxes[i]
 
-        if box:IsEmpty() and not box.bInStorage then
-            table.insert(emptyBoxes, box)
-        end
-    end
-    
-    print("Found " .. #emptyBoxes .. " boxes to destroy.")
-    
-    -- Destroy all empty boxes
-    for i = 1, #emptyBoxes do
-        local box = emptyBoxes[i]
-        print("Destroying empty box.")
-        despawner:SERVER_DestroyActor(box)
-    end
-end)
+		if box:IsEmpty() and not box.bInStorage then
+			table.insert(emptyBoxes, box)
+		end
+	end
+
+	print("Found " .. #emptyBoxes .. " boxes to destroy.")
+
+	-- Destroy all empty boxes
+	for i = 1, #emptyBoxes do
+		local box = emptyBoxes[i]
+		print("Destroying empty box.")
+		despawner:SERVER_DestroyActor(box)
+	end
+
+	return true
+end
+)
 
 function IsActorABox(actor)
     if not actor:IsValid() then
@@ -61,14 +49,5 @@ function IsActorABox(actor)
         return false
     end
 
-	return actor:IsA("/Game/BPs/BP_Box.BP_Box_C")
-end
-
-function GetActorId(actor)
-	if not actor:IsValid() then
-        print("Actor is not valid. Cannot get the ID of it.")
-        return nil
-    end
-
-	return actor:GetName()
+    return actor:IsA("/Game/BPs/BP_Box.BP_Box_C")
 end
