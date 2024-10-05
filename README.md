@@ -6,11 +6,12 @@ This repo contains a collection of mods that I have made for the game Grocery St
 ## Box Destroyer
 This mod aims to make box cleanup a breeze! Any empty boxes lying on the ground will be deleted when you press Ctrl + F7. Empty boxes on storage shelves will not be deleted.
 
+If the player executing the box deletion is carrying an empty box, the process is aborted. This avoids an issue where if a carried item is destroyed, then the player will not be able to pick up any other items until they leave and rejoin the session.
+
 The keybind is configurable in the config.lua file similar to other mods.
 
 ### Known Issues/Future Work
-- If any player is carrying an empty box, the box is deleted and that player will be unable to pick anything else up until they leave and rejoin the session.
-- If the player executing the box deletion is carrying something, the process is aborted. This is in an effort to reduce the chance of entering the bugged state as mentioned above.
+- If a player who is not the player executing the box deletion is carrying an empty box, the box is deleted and that player will be unable to pick anything else up until they leave and rejoin the session.
 
 # Contributing
 
