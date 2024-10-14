@@ -11,6 +11,15 @@ The keybind is configurable in the config.lua file similar to other mods.
 ### Known Issues/Future Work
 - If a player who is not the player executing the box deletion is carrying an empty box, the box is deleted and that player will be unable to pick anything else up until they leave and rejoin the session.
 
+## Flash Mob
+Ever felt like your grocery store was just a bit too peaceful? Introducing the Flash Mob mod! With a simple press of Ctrl + F4, watch as a horde of eager
+shoppers flood your aisles, ready to grab every last can of beans and loaf of bread. Whether you want a cozy crowd or a full-blown shopping frenzy, you
+control the chaos with a configurable customer count. Perfect for those moments when you need a little extra excitement in your store management life.
+Just be sure to keep an eye on the checkout lines!
+
+### Known Issues/Future Work
+- Upon leaving your session, _after_ your game saves, the game may crash! :) I have no idea how to fix this. Rest assured though that the save is completed, so no progress is lost.
+
 ## Rich Customers
 Have you ever gotten frustrated with how frugal your customers are? Don't you want to just be a fat cat grocery store mogul with no regard for the basic requirements of living for the peasants of the world?
 Well now you can be! This mod makes all of your customers super rich and no longer worry about the price of your goods.
