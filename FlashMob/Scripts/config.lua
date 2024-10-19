@@ -1,11 +1,17 @@
 local config = {
-    --The maximum amount of customers you want in your flash mob. When flash mob is initiated, it will spawn customers until this amount is reached.
-    MaxCustomerAmount = 50,
+    --@description The maximum amount of customers you want in your flash mob. When flash mob is initiated, it will spawn customers until this amount is reached.
+    --@type int
+    --@default 50
+    max_customer_amount = 50,
 
-    -- Modifier keys that need to be pressed with the key to initiate the flash mob.
+    --@description Modifier keys that need to be pressed with the key set below
+    --@type Key
+    --@default Key.F7
     modifier_keys = { ModifierKey.CONTROL },
-    -- Key that needs to be pressed with the modifier keys to initiate the flash mob.
+
+    --@description Key to delete all empty boxes
+	--@type Key
+	--@default Key.F4
     key = Key.F4
 }
-
 return config

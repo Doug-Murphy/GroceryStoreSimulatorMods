@@ -10,8 +10,8 @@ NotifyOnNewObject("/Game/BPs/AI/BP_Customer.BP_Customer_C", function ()
         local customer = customers[i]
         local customerId = GetActorId(customer)
 
-        if customer.OverpricedRatio ~= config.MaximumAcceptableCostMultiplier then
-            customer.OverpricedRatio = config.MaximumAcceptableCostMultiplier
+        if customer.OverpricedRatio ~= config.max_acceptable_cost_multiplier then
+            customer.OverpricedRatio = config.max_acceptable_cost_multiplier
             print("Successfully set customer " .. customerId .. " overpriced ratio to " .. tostring(customer.OverpricedRatio))
         end
     end

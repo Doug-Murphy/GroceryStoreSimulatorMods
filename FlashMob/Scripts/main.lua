@@ -17,19 +17,19 @@ RegisterKeyBind(config.key, config.modifier_keys, function()
         return
 	end
 
-	populationManager.MaxCustomerCount = config.MaxCustomerAmount
-	print("Set max customers count to " .. tostring(config.MaxCustomerAmount))
+	populationManager.MaxCustomerCount = config.max_customer_amount
+	print("Set max customers count to " .. tostring(config.max_customer_amount))
 
-	if (config.MaxCustomerAmount == populationManager.CurrentCustomerCount) then
+	if (config.max_customer_amount == populationManager.CurrentCustomerCount) then
 	    print("You currently have the maximum amount of customers that you set in your config. Cannot spawn any customers.")
 	    return
 	end
 
-	print("Current customer count is " .. tostring(populationManager.CurrentCustomerCount) .. ". Spawning " .. tostring(config.MaxCustomerAmount - populationManager.CurrentCustomerCount) .. " customers now.")
+	print("Current customer count is " .. tostring(populationManager.CurrentCustomerCount) .. ". Spawning " .. tostring(config.max_customer_amount - populationManager.CurrentCustomerCount) .. " customers now.")
 
     --Calling TrySpawningCars() WITHOUT also calling InvalidateSpawnDelay does not crash after saving. If both are called, the game crashes after saving.
     --However, without calling InvalidSpawnDelay(), then TrySpawningCars() does nothing because the delay has not elapsed in order for a car to spawn.
-	for i = populationManager.CurrentCustomerCount, config.MaxCustomerAmount do
+	for i = populationManager.CurrentCustomerCount, config.max_customer_amount do
         populationManager:InvalidateSpawnDelay()
         populationManager:TrySpawningCars()
 	end
