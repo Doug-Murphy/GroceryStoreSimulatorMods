@@ -10,7 +10,7 @@ for you and your customers every time. Happy shopping!
 
 ## Box Destroyer
 This mod aims to make box cleanup a breeze! Any empty boxes lying on the ground will be deleted when you press Ctrl + F7. 
-Empty boxes being held or placed on storage shelves will not be deleted.
+Empty boxes placed on storage shelves or being held by you/an employee will not be deleted.
 
 The keybind is configurable in the config.lua file similar to other mods.
 
