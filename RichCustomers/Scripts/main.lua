@@ -1,7 +1,9 @@
 ﻿local config = require "config"
 
 local version = "1.0.0"
-print("Loading version " .. version .. " of RichCustomers.")
+local modName = "[RichCustomers] "
+
+print(modName .. "Loading version " .. version)
 
 NotifyOnNewObject("/Game/BPs/AI/BP_Customer.BP_Customer_C", function ()
     local customers = FindAllOf("BP_Customer_C")
@@ -12,17 +14,17 @@ NotifyOnNewObject("/Game/BPs/AI/BP_Customer.BP_Customer_C", function ()
 
         if customer.OverpricedRatio ~= config.max_acceptable_cost_multiplier then
             customer.OverpricedRatio = config.max_acceptable_cost_multiplier
-            print("Successfully set customer " .. customerId .. " overpriced ratio to " .. tostring(customer.OverpricedRatio))
+            print(modName .. "Successfully set customer " .. customerId .. " overpriced ratio to " .. tostring(customer.OverpricedRatio))
         end
     end
 end)
 
 function GetActorId(actor)
 	if not actor:IsValid() then
-        print("Actor is not valid. Cannot get the identifier.")
+        print(modName .. "Actor is not valid. Cannot get the identifier.")
     end
 
 	return actor:GetFullName()
 end
 
-print("Successfully loaded version " .. version .. " of RichCustomers.")
+print(modName .. "Successfully loaded version " .. version)
