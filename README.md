@@ -16,7 +16,7 @@ The keybind is configurable in the config.lua file similar to other mods.
 
 ### Known Issues/Future Work
 - If a player who is not the player executing the box deletion is carrying an empty box, the box is deleted and that 
-- player will be unable to pick anything else up until they leave and rejoin the session.
+player will be unable to pick anything else up until they leave and rejoin the session.
 
 ## Flash Mob
 Ever felt like your grocery store was just a bit too peaceful? Introducing the Flash Mob mod! With a simple press of 
@@ -27,7 +27,7 @@ eye on the checkout lines!
 
 ### Known Issues/Future Work
 - Upon leaving your session, _after_ your game saves, the game may crash! :) I have no idea how to fix this. Rest assured 
-- though that the save is completed, so no progress is lost.
+though that the save is completed, so no progress is lost.
 
 ## Rich Customers
 Have you ever gotten frustrated with how frugal your customers are? Don't you want to just be a fat cat grocery store 
