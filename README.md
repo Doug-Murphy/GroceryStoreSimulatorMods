@@ -18,6 +18,17 @@ The keybind is configurable in the config.lua file similar to other mods.
 - If a player who is not the player executing the box deletion is carrying an empty box, the box is deleted and that 
 player will be unable to pick anything else up until they leave and rejoin the session.
 
+## Checkout Toggler
+A simple mod that makes opening and closing checkout counters and self-checkouts a breeze! If you have a bunch of
+checkouts and don't like having to close certain ones every time you reload your game, this will make that burden less
+painful. Simply look at the checkout counter or self checkout that you want to close (or open) and press Ctrl + C. If
+the checkout is open/on, it will close/turn off. If the checkout is closed/off, it will open/turn on.
+
+Note that the game has a rather large invisible box around the checkouts. This means that even though you're not looking
+at the visible portion of the checkout, you may still be targeting it.
+
+The keybind is configurable in the config.lua file similar to other mods.
+
 ## Flash Mob
 Ever felt like your grocery store was just a bit too peaceful? Introducing the Flash Mob mod! With a simple press of 
 Ctrl + F4, watch as a horde of eager shoppers flood your aisles, ready to grab every last can of beans and loaf of bread. 
